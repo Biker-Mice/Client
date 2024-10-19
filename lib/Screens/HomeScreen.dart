@@ -4,6 +4,8 @@ import 'package:client/Screens/ProfileScreen.dart';
 import 'package:client/Screens/SerachScreen.dart';
 import 'package:flutter/material.dart';
 
+import '../Screens/suraj/addParts.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -15,38 +17,60 @@ class _HomeScreenState extends State<HomeScreen> {
   int selectedIndex = 0;
 
   final List<Widget> _pages = [
-    Center(child: Text('Home Screen')), // Home
-    SearchScreen(), // Search
-    AppointmentScreen(), // Appointment
-    NotificationScreen(), // Notification
-    ProfileScreen(), // Profile
+    const Center(child: Text('Home Screen')), // Home
+    const SearchScreen(), // Search
+    const AppointmentScreen(), // Appointment
+    const NotificationScreen(), // Notification
+    const ProfileScreen(), // Profile
   ];
 
   void _onItemTapped(int index) {
     setState(() {
-      selectedIndex = index; 
+      selectedIndex = index;
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body:Column(
-         children: [
-           if (selectedIndex == 0) 
+      body: Column(
+        children: [
+          if (selectedIndex == 0)
             Expanded(
               child: Container(
                 alignment: Alignment.center,
-                child: Text('Home Screen'),
+                child: const Text('Home Screen'),
               ),
             )
-          else 
+          else
             Expanded(
-              child: _pages[selectedIndex], 
+              child: _pages[selectedIndex],
             ),
-         ],
 
-
+          // Add Spareparts Button
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ElevatedButton(
+              onPressed: () {
+                // Action for Add Spareparts button
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const AddParts()));
+                print('Add Spareparts Button Pressed');
+              },
+              style: ElevatedButton.styleFrom(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+              child: const Text(
+                'Add Spare Parts',
+                style: TextStyle(fontSize: 16),
+              ),
+            ),
+          ),
+        ],
       ), // Directly display the selected page
 
       floatingActionButton: SizedBox(
@@ -57,12 +81,12 @@ class _HomeScreenState extends State<HomeScreen> {
           onPressed: () {
             _onItemTapped(2); // Navigate to Appointment Screen
           },
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
           child: Icon(
             Icons.add,
             size: 30,
-          ),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
           ),
         ),
       ),
@@ -87,7 +111,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 _onItemTapped(1);
               },
             ),
-            const SizedBox(width: 60), 
+            const SizedBox(width: 60),
             IconButton(
               icon: const Icon(Icons.notifications),
               onPressed: () {
