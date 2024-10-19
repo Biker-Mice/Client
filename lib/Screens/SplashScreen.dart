@@ -27,7 +27,7 @@ class _SplashScreenState extends State<SplashScreen> {
       body:Center(
         child: Container(
          
-          child:Image(image: AssetImage("assets/image/image.png"))
+          child:const Image(image: AssetImage("assets/image/image.png"))
         ),
         ),
     );
